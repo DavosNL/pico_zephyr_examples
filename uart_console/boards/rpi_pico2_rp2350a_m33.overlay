@@ -1,0 +1,13 @@
+#include <zephyr/dt-bindings/pinctrl/rpi-pico-pinctrl-common.h>
+
+&pinctrl {
+    uart0_default: uart0_default {
+        group1 {
+            pinmux = <UART0_TX_P16>;
+        };
+        group2 {
+            pinmux = <UART0_RX_P17>;
+            input-enable;
+        };
+    };
+};
