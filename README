@@ -1,29 +1,15 @@
 # Pico Zephyr Examples
 
-Examples for the Raspberry Pi Pico family using Zephyr RTOS
+Examples for the Raspberry Pi Pico family using the Zephyr RTOS
 
 ## Projects
 
-- **uart console** — basic UART console output on GPIO16/17
-- **wifi connect** — connect the Pico W / Pico 2W to WiFi using Zephyr’s networking stack
+- **uart_console** — basic UART console output on GPIO16/17
+- **wifi_connect** — connect the Pico W / Pico 2W to WiFi using Zephyr’s networking stack
 
-## WiFi‑credentials (WSL Setup)
 
-If you are developing inside WSL (Windows Subsystem for Linux) and compiling via VS Code, you must share your WiFi credentials from Windows to the WSL environment.
+## Further Reading
+I wrote a detailed guide on how to connect, flash and debug a Raspberry Pi Pico from WSL2, including USB passthrough, VS Code integration and common pitfalls:
 
-### 1. Set environment variables in Windows
-Open **PowerShell** on Windows and run the following commands (replace with your own WiFi details):
-
-```powershell
-[Environment]::SetEnvironmentVariable("WIFI_SSID", "YourWifiName", "User")
-[Environment]::SetEnvironmentVariable("WIFI_PSK", "YourPassword", "User")
-```
-
-### 2. Share variables with WSL
-Tell Windows to pass these variables into WSL by configuring `WSLENV` with the `/u` flag (which flags them for UTF-8 translation):
-
-```powershell
-[Environment]::SetEnvironmentVariable("WSLENV", "WIFI_SSID/u:WIFI_PSK/u", "User")
-```
-
-**Restart VS Code completely** to apply the new environment variables.
+How to Connect and Flash a Raspberry Pi Pico from WSL2  
+https://medium.com/@davey013/how-to-connect-and-flash-a-raspberry-pi-pico-from-wsl2-4715e4382eff
