@@ -28,6 +28,8 @@ static void wifi_event_handler(struct net_mgmt_event_callback *cb,
             printk("No IP address found\n");
         }
 
+        k_sem_give(&wifi_connected); 
+
     } else if (mgmt_event == NET_EVENT_WIFI_DISCONNECT_RESULT) {
         printk("WiFi disconnected.\n");
     }
