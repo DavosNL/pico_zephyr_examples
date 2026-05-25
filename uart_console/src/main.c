@@ -1,5 +1,4 @@
 #include <zephyr/kernel.h>
-#include <zephyr/logging/log.h>
 #include <zephyr/drivers/uart.h>
 #include <string.h>
 

@@ -11,7 +11,7 @@ static void wifi_event_handler(struct net_mgmt_event_callback *cb,
                                 uint64_t mgmt_event, struct net_if *iface)
 {
     if (mgmt_event == NET_EVENT_WIFI_CONNECT_RESULT) {
-        printk("WiFi verbonden!\n");
+        printk("Connected to Wi-Fi!\n");
 
         //Kleine wacht zodat DHCP kan afhandelen
         k_sleep(K_SECONDS(1));
@@ -23,13 +23,13 @@ static void wifi_event_handler(struct net_mgmt_event_callback *cb,
             net_addr_ntop(AF_INET,
                           &ipv4->unicast[0].ipv4.address.in_addr,
                           ip_str, sizeof(ip_str));
-            printk("IP adres: %s\n", ip_str);
+            printk("IP address: %s\n", ip_str);
         } else {
-            printk("Geen IP adres gevonden\n");
+            printk("No IP address found\n");
         }
 
     } else if (mgmt_event == NET_EVENT_WIFI_DISCONNECT_RESULT) {
-        printk("WiFi verbroken.\n");
+        printk("WiFi disconnected.\n");
     }
 }
 
@@ -50,14 +50,14 @@ int main(void)
         .security    = WIFI_SECURITY_TYPE_PSK,
     };
 
-    printk("Verbinden met %s...\n", WIFI_SSID);
+    printk("Connect to %s...\n", WIFI_SSID);
     int ret = net_mgmt(NET_REQUEST_WIFI_CONNECT, iface, &params, sizeof(params));
     if (ret) {
-        printk("Verbinden mislukt: %d\n", ret);
+        printk("Connection failed: %d\n", ret);
         return ret;
     }
 
-    // Wacht op connectie
+    // Waiting for connection
     k_sem_take(&wifi_connected, K_SECONDS(30));
 
 
