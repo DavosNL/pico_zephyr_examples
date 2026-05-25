@@ -38,12 +38,6 @@ static void wifi_event_handler(struct net_mgmt_event_callback *cb,
 int main(void)
 {
     struct net_if *iface = net_if_get_default();
-
-    net_mgmt_init_event_callback(&wifi_cb, wifi_event_handler,
-        NET_EVENT_WIFI_CONNECT_RESULT | 
-        NET_EVENT_WIFI_DISCONNECT_RESULT);
-    net_mgmt_add_event_callback(&wifi_cb);
-
     struct wifi_connect_req_params params = {
         .ssid        = WIFI_SSID,
         .ssid_length = strlen(WIFI_SSID),
@@ -51,6 +45,11 @@ int main(void)
         .psk_length  = strlen(WIFI_PSK),
         .security    = WIFI_SECURITY_TYPE_PSK,
     };
+
+    net_mgmt_init_event_callback(&wifi_cb, wifi_event_handler,
+        NET_EVENT_WIFI_CONNECT_RESULT | 
+        NET_EVENT_WIFI_DISCONNECT_RESULT);
+    net_mgmt_add_event_callback(&wifi_cb);
 
     printk("Connect to %s...\n", WIFI_SSID);
     int ret = net_mgmt(NET_REQUEST_WIFI_CONNECT, iface, &params, sizeof(params));
