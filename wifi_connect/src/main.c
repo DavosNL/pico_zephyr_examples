@@ -13,10 +13,10 @@ static void wifi_event_handler(struct net_mgmt_event_callback *cb,
     if (mgmt_event == NET_EVENT_WIFI_CONNECT_RESULT) {
         printk("Connected to Wi-Fi!\n");
 
-        //Kleine wacht zodat DHCP kan afhandelen
+        //Short delay to allow DHCP to complete
         k_sleep(K_SECONDS(1));
 
-        // IP direct uitlezen van de interface
+        // Read the IP address directly from the interface
         struct net_if_ipv4 *ipv4 = iface->config.ip.ipv4;
         if (ipv4 != NULL) {
             char ip_str[NET_IPV4_ADDR_LEN];
